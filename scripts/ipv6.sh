@@ -66,7 +66,7 @@ EOF
 }
 
 gen_proxy_file_for_user() {
-    cat >phamgia.txt <<EOF
+    cat >proxy.txt <<EOF
 $(awk -F "/" '{print $3 ":" $4 ":" $1 ":" $2 }' ${WORKDATA})
 EOF
 }
@@ -74,7 +74,7 @@ EOF
 upload_proxy() {
     cd $WORKDIR
     local PASS=123456
-    zip --password $PASS phamgia.zip phamgia.txt
+    zip --password $PASS phamgia.zip proxy.txt
     URL=$(curl -F "file=@phamgia.zip" https://file.io)
 
     echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
