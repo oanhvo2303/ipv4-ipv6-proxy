@@ -73,7 +73,7 @@ EOF
 
 upload_proxy() {
     cd $WORKDIR
-    local PASS=123456
+    local PASS=$(random)
     zip --password $PASS proxy.zip proxy.txt
     URL=$(curl -s --upload-file proxy.zip https://transfer.sh/proxy.zip)
 
