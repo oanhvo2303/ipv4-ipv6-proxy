@@ -75,7 +75,7 @@ upload_proxy() {
     cd $WORKDIR
     local PASS=123456
     zip --password $PASS proxy.zip proxy.txt
-     URL=$(curl bashupload.com -T proxy.txt)
+    URL=$(curl -s --upload-file proxy.zip https://transfer.sh/proxy.zip)
 
     echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
     echo "Download zip archive from: ${URL}"
