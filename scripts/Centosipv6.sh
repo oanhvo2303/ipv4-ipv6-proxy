@@ -57,7 +57,9 @@ setuid 65535
 stacksize 6291456 
 flush
 auth strong
+
 users $(awk -F "/" 'BEGIN{ORS="";} {print $1 ":CL:" $2 " "}' ${WORKDATA})
+
 $(awk -F "/" '{print "auth strong\n" \
 "allow " $1 "\n" \
 "proxy -6 -n -a -p" $4 " -i" $3 " -e"$5"\n" \
@@ -72,14 +74,14 @@ EOF
 }
 
 upload_proxy() {
-    cd $WORKDIR
+     cd $WORKDIR
     local PASS=$(random)
     zip --password $PASS proxy.zip proxy.txt
     URL=$(curl -s --upload-file proxy.zip https://transfer.sh/proxy.zip)
 
     echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
     echo "Download zip archive from: ${URL}"
-    echo "Password: ${PASS}
+    echo "Password: ${PASS}"
 
 }
 gen_data() {
